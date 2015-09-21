@@ -13,20 +13,10 @@
 namespace SM    //Sudden Magic
 {
 
-StringListBoxModel::StringListBoxModel()
-    : juce::ListBoxModel()
-{
-}
-
 StringListBoxModel::~StringListBoxModel()
 {
     //nothing special needed
 }
-
-int StringListBoxModel::getNumRows() const
-{
-    return static_cast<int>(items.size());
-};
 
 int StringListBoxModel::getNumRows()
 {
@@ -37,23 +27,15 @@ void StringListBoxModel::paintListBoxItem(const int rowNumber,
                                           juce::Graphics &g,
                                           const int width,
                                           const int height,
-                                          const bool rowIsSelected) const
+                                          const bool /*rowIsSelected*/)
 {
     if (rowNumber < getNumRows())
     {
-        //do the drawing
-    }
-};
-
-void StringListBoxModel::paintListBoxItem(const int rowNumber,
-                                          juce::Graphics &g,
-                                          const int width,
-                                          const int height,
-                                          const bool rowIsSelected)
-{
-    if (rowNumber < getNumRows())
-    {
-        //do the drawing
+        g.setColour(juce::Colours::black);
+        juce::Font f(height * 0.7f);
+        f.setHorizontalScale(0.9f);
+        g.setFont(f);
+        g.drawText(juce::String(items[rowNumber].c_str()), 4, 0, width - 6, height, juce::Justification::topLeft);
     }
 };
 

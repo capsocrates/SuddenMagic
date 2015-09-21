@@ -13,6 +13,7 @@
 
 #include "..\JuceLibraryCode\modules\juce_gui_basics\juce_gui_basics.h" //for juce::ListBoxModel
 
+#include <cassert>
 #include <iterator>
 #include <string>
 #include <vector>
@@ -28,25 +29,8 @@ public:
     typedef std::vector<std::wstring>::iterator iterator;
     typedef std::vector<std::wstring>::const_iterator const_iterator;
 
-    StringListBoxModel();
-    template<typename RangeT>
-    StringListBoxModel(const RangeT& in)
-        : juce::ListBoxModel()
-        , StringListBoxModel(begin(in), end(in))
-    {};
-    template<typename BegItrT, typename EndItrT>
-    StringListBoxModel(const BegItrT begin, const EndItrT end)
-        : juce::ListBoxModel()
-        , items(begin, end)
-    {};
     ~StringListBoxModel() override;
-    int getNumRows() const;
     int getNumRows() override;
-    void paintListBoxItem(int rowNumber,
-                          juce::Graphics &g,
-                          int width,
-                          int height,
-                          bool rowIsSelected) const;
     void paintListBoxItem(int rowNumber,
                           juce::Graphics &g,
                           int width,
@@ -56,9 +40,14 @@ public:
     void addRow();
     void addRow(const std::wstring& in);
 
-    friend auto inserter(StringListBoxModel& slbm, const const_iterator at) -> std::insert_iterator<std::vector<std::wstring>>
+    friend auto inserter(StringListBoxModel& slbm, const iterator at) -> std::insert_iterator<std::vector<std::wstring>>
     {
-        return std::inserter(slbm, at);
+        return std::inserter(slbm.items, at);
+    }
+
+    auto back_inserter() -> std::back_insert_iterator<std::vector<std::wstring>>
+    {
+        return std::back_inserter(items);
     }
 
     friend auto back_inserter(StringListBoxModel& slbm) -> std::back_insert_iterator<std::vector<std::wstring>>
