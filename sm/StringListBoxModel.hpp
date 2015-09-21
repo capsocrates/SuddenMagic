@@ -29,6 +29,8 @@ public:
     typedef std::vector<std::wstring>::iterator iterator;
     typedef std::vector<std::wstring>::const_iterator const_iterator;
 
+    StringListBoxModel(int itemsize);
+
     ~StringListBoxModel() override;
     int getNumRows() override;
     void paintListBoxItem(int rowNumber,

@@ -12,6 +12,12 @@
 
 namespace SM    //Sudden Magic
 {
+StringListBoxModel::StringListBoxModel(int itemsize)
+    : ListBoxModel()
+    , items(static_cast<std::vector<std::wstring>::size_type>(itemsize), std::wstring(L""))
+{
+
+}
 
 StringListBoxModel::~StringListBoxModel()
 {
