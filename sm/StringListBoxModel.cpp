@@ -27,7 +27,7 @@ StringListBoxModel::~StringListBoxModel()
 int StringListBoxModel::getNumRows()
 {
     return static_cast<int>(items.size());
-};
+}
 
 void StringListBoxModel::paintListBoxItem(const int rowNumber,
                                           juce::Graphics &g,
@@ -38,12 +38,12 @@ void StringListBoxModel::paintListBoxItem(const int rowNumber,
     if (rowNumber < getNumRows())
     {
         g.setColour(juce::Colours::black);
-        juce::Font f(height * 0.7f);
-        f.setHorizontalScale(0.9f);
-        g.setFont(f);
-        g.drawText(juce::String(items[rowNumber].c_str()), 4, 0, width - 6, height, juce::Justification::topLeft);
+        juce::Font font(height * 0.7f);
+        font.setHorizontalScale(0.9f);
+        g.setFont(font);
+        g.drawText(juce::String(items[rowNumber].c_str()), 4, 0, width - 6, height, juce::Justification::centredLeft);
     }
-};
+}
 
 void StringListBoxModel::addRow()
 {
