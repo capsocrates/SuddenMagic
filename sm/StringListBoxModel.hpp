@@ -11,7 +11,10 @@
   ==============================================================================
 */
 
+#pragma warning(push, 0)
+#include "..\JuceLibraryCode\AppConfig.h"
 #include "..\JuceLibraryCode\modules\juce_gui_basics\juce_gui_basics.h" //for juce::ListBoxModel
+#pragma warning(pop)
 
 #include <cassert>
 #include <iterator>
@@ -29,7 +32,7 @@ public:
     typedef std::vector<std::wstring>::iterator iterator;
     typedef std::vector<std::wstring>::const_iterator const_iterator;
 
-    StringListBoxModel(int itemsize);
+    explicit StringListBoxModel(int itemsize);
 
     ~StringListBoxModel() override;
     int getNumRows() override;
